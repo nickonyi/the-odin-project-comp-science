@@ -72,3 +72,85 @@ function fib(n) {
         return fib(n - 1) + fib(n - 2);
     }
 }
+
+function power(n, x) {
+    if (n == 1 || x === 0) {
+        return 1;
+    } else {
+        return n * power(n, x - 1);
+    }
+}
+
+function productOfArray(array) {
+
+    if (array.length == 0) {
+        return 1;
+    } else {
+        return array.shift() * productOfArray(array);
+    }
+}
+
+var nestedObject = {
+    data: {
+        info: {
+            stuff: {
+                thing: {
+                    moreStuff: {
+                        magicNumber: 44,
+                        something: 'foo2'
+                    }
+                }
+            }
+        }
+    }
+}
+
+const moreStuff = {
+    magicNumber: 44,
+    something: 'foo2'
+}
+const obj = {
+    a: 1,
+    b: {
+        c: 2,
+        d: {
+            e: 3
+        }
+    }
+}
+
+function findValue(nestedObject, item) {
+    for (const key in nestedObject) {
+        if (nestedObject.hasOwnProperty(key)) {
+            const value = nestedObject[key]
+
+            if (value === item) {
+                return true;
+            }
+
+            if (typeof value === "object") {
+                const found = contains(nestedObject[key], item);
+                if (found) {
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+function contains(obj, value) {
+    for (const key in obj) {
+        if (typeof obj[key] === "object") {
+            return contains(obj[key], value);
+        }
+        if (obj[key] === value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+console.log(contains(nestedObject, 44));
+console.log(Object.values(moreStuff));
